@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moon Coffee</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: #fdfbf7;
+        }
+        .card-zoom:hover img {
+            transform: scale(1.1);
+        }
+        /* Modal Animation */
+        #product-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+        }
+        #product-modal.show {
+            display: flex;
+        }
+        .modal-content {
+            animation: modalFadeUp 0.3s ease-out;
+        }
+        @keyframes modalFadeUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .notification {
+            transform: translateX(100%);
+            transition: transform 0.3s ease-in-out;
+        }
+        .notification.show {
+            transform: translateX(0);
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <header class="bg-amber-800 text-white py-12 shadow-md sticky top-0 z-40">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4"> Moon Coffee</h1>
+            <p class="text-lg text-amber-100">Moon Coffee - Nơi dừng chân mỗi tối</p>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-12">
+        <h2 class="text-3xl font-bold text-center text-amber-900 mb-10">Best Seller Nhà Moon</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            
+            <div class="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-amber-100 flex flex-col">
+                <div class="card-zoom h-56 overflow-hidden relative group rounded-t-2xl">
+                    <img src="https://ongbi.vn/wp-content/uploads/2023/01/ca-phe-sua-da.jpg" 
+                         alt="Cà Phê Sữa Đá" 
+                         class="w-full h-full object-cover transition-transform duration-500">
+                    <div class="absolute top-3 right-3 bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full">Best Seller</div>
+                </div>
+                <div class="p-5 flex flex-col flex-grow">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="text-lg font-bold text-gray-900">Cà Phê Sữa Đá</h3>
+                        <span class="text-lg font-bold text-amber-700">18.000đ</span>
+                    </div>
+                    <p class="text-gray-600 text-sm mb-4 flex-grow line-clamp-2">
+                        Sự kết hợp hoàn hảo giữa cà phê Robusta đậm đà rang xay tại chỗ và sữa đặc ngọt ngào.
+                    </p>
+                    <button onclick="openDetails('Cà Phê Sữa Đá', '18.000đ', 'Sự kết hợp hoàn hảo giữa cà phê Robusta đậm đà rang xay tại chỗ và sữa đặc ngọt ngào.', 'https://ongbi.vn/wp-content/uploads/2023/01/ca-phe-sua-da.jpg')" class="w-full bg-amber-700 hover:bg-amber-800 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center gap-2">
+                         Mua Ngay
+                    </button>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-amber-100 flex flex-col">
+                <div class="card-zoom h-56 overflow-hidden rounded-t-2xl">
+                    <img src="https://horecavn.com/wp-content/uploads/2024/05/huong-dan-cong-thuc-tra-dao-cam-sa-hut-khach-ngon-kho-cuong_20240526180626.jpg" 
+                         alt="Trà Đào Cam Sả" 
+                         class="w-full h-full object-cover transition-transform duration-500">
+                </div>
+                <div class="p-5 flex flex-col flex-grow">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="text-lg font-bold text-gray-900">Trà Đào Cam Sả</h3>
+                        <span class="text-lg font-bold text-amber-700">30.000đ</span>
+                    </div>
+                    <p class="text-gray-600 text-sm mb-4 flex-grow line-clamp-2">
+                        Vị thanh mát của trà đen hòa quyện cùng hương sả thơm lừng và miếng đào ngâm giòn tan.
+                    </p>
+                    <button onclick="openDetails('Trà Đào Cam Sả', '30.000đ', 'Vị thanh mát của trà đen hòa quyện cùng hương sả thơm lừng và miếng đào ngâm giòn tan.', 'https://horecavn.com/wp-content/uploads/2024/05/huong-dan-cong-thuc-tra-dao-cam-sa-hut-khach-ngon-kho-cuong_20240526180626.jpg')" class="w-full bg-amber-700 hover:bg-amber-800 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center gap-2">
+                         Mua Ngay
+                    </button>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-amber-100 flex flex-col">
+                <div class="card-zoom h-56 overflow-hidden rounded-t-2xl">
+                    <img src="https://cdn.loveandlemons.com/wp-content/uploads/2023/06/iced-matcha-latte.jpg" 
+                         alt="Matcha Latte" 
+                         class="w-full h-full object-cover transition-transform duration-500">
+                </div>
+                <div class="p-5 flex flex-col flex-grow">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="text-lg font-bold text-gray-900">Matcha Latte</h3>
+                        <span class="text-lg font-bold text-amber-700">35.000đ</span>
+                    </div>
+                    <p class="text-gray-600 text-sm mb-4 flex-grow line-clamp-2">
+                        Bột Matcha Nhật Bản thượng hạng kết hợp cùng sữa tươi tạo nên lớp bọt mịn màng.
+                    </p>
+                    <button onclick="openDetails('Matcha Latte', '35.000đ', 'Bột Matcha Nhật Bản thượng hạng kết hợp cùng sữa tươi tạo nên lớp bọt mịn màng.', 'https://cdn.loveandlemons.com/wp-content/uploads/2023/06/iced-matcha-latte.jpg')" class="w-full bg-amber-700 hover:bg-amber-800 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center gap-2">
+                         Mua Ngay
+                    </button>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-amber-100 flex flex-col">
+                <div class="card-zoom h-56 overflow-hidden rounded-t-2xl">
+                    <img src="https://eggyolk.vn/wp-content/uploads/2024/05/bac-xiu-da-20230720090419-e.jpg" 
+                         alt="Bạc Xỉu" 
+                         class="w-full h-full object-cover transition-transform duration-500">
+                </div>
+                <div class="p-5 flex flex-col flex-grow">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="text-lg font-bold text-gray-900">Bạc Xỉu</h3>
+                        <span class="text-lg font-bold text-amber-700">20.000đ</span>
+                    </div>
+                    <p class="text-gray-600 text-sm mb-4 flex-grow line-clamp-2">
+                        Hương vị Sài Gòn xưa với nhiều sữa, ít cà phê, béo ngậy và thơm lừng khó cưỡng.
+                    </p>
+                    <button onclick="openDetails('Bạc Xỉu', '20.000đ', 'Hương vị Sài Gòn xưa với nhiều sữa, ít cà phê, béo ngậy và thơm lừng khó cưỡng.', 'https://eggyolk.vn/wp-content/uploads/2024/05/bac-xiu-da-20230720090419-e.jpg')" class="w-full bg-amber-700 hover:bg-amber-800 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center gap-2">
+                         Mua Ngay
+                    </button>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-amber-100 flex flex-col">
+                <div class="card-zoom h-56 overflow-hidden relative rounded-t-2xl">
+                    <img src="https://cubes-asia.com/storage/blogs/2024-12/cach-lam-ca-phe-muoi-nguyen-lieu-cong-thuc-lam.jpg" 
+                         alt="Cà Phê Muối" 
+                         class="w-full h-full object-cover transition-transform duration-500">
+                     <div class="absolute top-3 right-3 bg-amber-500 text-white text-xs font-bold px-3 py-1 rounded-full">Món Lạ</div>
+                </div>
+                <div class="p-5 flex flex-col flex-grow">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="text-lg font-bold text-gray-900">Cà Phê Muối</h3>
+                        <span class="text-lg font-bold text-amber-700">22.000đ</span>
+                    </div>
+                    <p class="text-gray-600 text-sm mb-4 flex-grow line-clamp-2">
+                        Đặc sản Huế với lớp kem muối đánh bông mịn màng phủ lên cà phê nóng hổi.
+                    </p>
+                    <button onclick="openDetails('Cà Phê Muối', '22.000đ', 'Đặc sản Huế với lớp kem muối đánh bông mịn màng phủ lên cà phê nóng hổi.', 'https://cubes-asia.com/storage/blogs/2024-12/cach-lam-ca-phe-muoi-nguyen-lieu-cong-thuc-lam.jpg')" class="w-full bg-amber-700 hover:bg-amber-800 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center gap-2">
+                         Mua Ngay
+                    </button>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-amber-100 flex flex-col">
+                <div class="card-zoom h-56 overflow-hidden rounded-t-2xl">
+                    <img src="https://xingfuvietnam.vn/wp-content/uploads/2023/02/xingfu-tra-sua-tran-chau-duong-den-2-FILEminimizer.jpg" 
+                         alt="Trà Sữa Trân Châu Đường Đen" 
+                         class="w-full h-full object-cover transition-transform duration-500">
+                </div>
+                <div class="p-5 flex flex-col flex-grow">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="text-lg font-bold text-gray-900">Trà Sữa Trân Châu Đường Đen</h3>
+                        <span class="text-lg font-bold text-amber-700">30.000đ</span>
+                    </div>
+                    <p class="text-gray-600 text-sm mb-4 flex-grow line-clamp-2">
+                        Trà sữa thơm béo kết hợp cùng trân châu nấu đường đen dẻo dai, ngọt ngào đậm vị.
+                    </p>
+                    <button onclick="openDetails('Trà Sữa Trân Châu Đường Đen', '30.000đ', 'Trà sữa thơm béo kết hợp cùng trân châu nấu đường đen dẻo dai, ngọt ngào đậm vị.', 'https://xingfuvietnam.vn/wp-content/uploads/2023/02/xingfu-tra-sua-tran-chau-duong-den-2-FILEminimizer.jpg')" class="w-full bg-amber-700 hover:bg-amber-800 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center gap-2">
+                         Mua Ngay
+                    </button>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-amber-100 flex flex-col">
+                <div class="card-zoom h-56 overflow-hidden rounded-t-2xl">
+                    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgie2Gu6JYVWwIG5xZDmXIwMZzUJYjhP_fkmfXxKvxT1hi3Oe1ADio9rSturnPKuFMXm85WW1cS0C1Rb0ap-G1Vd1AgiyU2GK61m9Bo-e_saNGEaQ3YxE-tgcRP2PM34auHJzFZF2GP_RY/s600/1.jpg" 
+                         alt="Nước Ép Ổi" 
+                         class="w-full h-full object-cover transition-transform duration-500">
+                </div>
+                <div class="p-5 flex flex-col flex-grow">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="text-lg font-bold text-gray-900">Nước Ép Ổi</h3>
+                        <span class="text-lg font-bold text-amber-700">25.000đ</span>
+                    </div>
+                    <p class="text-gray-600 text-sm mb-4 flex-grow line-clamp-2">
+                        100% ổi tươi nguyên chất, ngọt mát tự nhiên, giải nhiệt cấp tốc.
+                    </p>
+                    <button onclick="openDetails('Nước Ép Ổi', '25.000đ', '100% ổi tươi nguyên chất, ngọt mát tự nhiên, giải nhiệt cấp tốc.', 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgie2Gu6JYVWwIG5xZDmXIwMZzUJYjhP_fkmfXxKvxT1hi3Oe1ADio9rSturnPKuFMXm85WW1cS0C1Rb0ap-G1Vd1AgiyU2GK61m9Bo-e_saNGEaQ3YxE-tgcRP2PM34auHJzFZF2GP_RY/s600/1.jpg')" class="w-full bg-amber-700 hover:bg-amber-800 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center gap-2">
+                         Mua Ngay
+                    </button>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-amber-100 flex flex-col">
+                <div class="card-zoom h-56 overflow-hidden rounded-t-2xl">
+                    <img src="https://cooponline.vn/tin-tuc/wp-content/uploads/2025/10/sinh-to-dau-mon-giai-khat-mat-lanh-ngot-thanh-tu-nhien.png" 
+                         alt="Sinh Tố Dâu" 
+                         class="w-full h-full object-cover transition-transform duration-500">
+                </div>
+                <div class="p-5 flex flex-col flex-grow">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="text-lg font-bold text-gray-900">Sinh Tố Dâu</h3>
+                        <span class="text-lg font-bold text-amber-700">25.000đ</span>
+                    </div>
+                    <p class="text-gray-600 text-sm mb-4 flex-grow line-clamp-2">
+                        Thức uống giải nhiệt mùa hè hấp dẫn với màu hồng quyến rũ, vị chua ngọt hài hòa.
+                    </p>
+                    <button onclick="openDetails('Sinh Tố Dâu', '25.000đ', 'Thức uống giải nhiệt mùa hè hấp dẫn với màu hồng quyến rũ, vị chua ngọt hài hòa và hương thơm đặc trưng của dâu tây tươi.', 'https://cooponline.vn/tin-tuc/wp-content/uploads/2025/10/sinh-to-dau-mon-giai-khat-mat-lanh-ngot-thanh-tu-nhien.png')" class="w-full bg-amber-700 hover:bg-amber-800 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center gap-2">
+                         Mua Ngay
+                    </button>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-amber-100 flex flex-col">
+                <div class="card-zoom h-56 overflow-hidden rounded-t-2xl">
+                    <img src="https://dayphache.edu.vn/wp-content/uploads/2019/09/cach-nau-tra-sen-vang-long-nhan.jpg" 
+                         alt="Trà Sen Vàng" 
+                         class="w-full h-full object-cover transition-transform duration-500">
+                </div>
+                <div class="p-5 flex flex-col flex-grow">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="text-lg font-bold text-gray-900">Trà Sen Vàng</h3>
+                        <span class="text-lg font-bold text-amber-700">40.000đ</span>
+                    </div>
+                    <p class="text-gray-600 text-sm mb-4 flex-grow line-clamp-2">
+                        Trà ô long sen thơm nhẹ, kết hợp với hạt sen bùi bùi và kem sữa mặn.
+                    </p>
+                    <button onclick="openDetails('Trà Sen Vàng', '40.000đ', 'Trà ô long sen thơm nhẹ, kết hợp với hạt sen bùi bùi và kem sữa mặn.', 'https://dayphache.edu.vn/wp-content/uploads/2019/09/cach-nau-tra-sen-vang-long-nhan.jpg')" class="w-full bg-amber-700 hover:bg-amber-800 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center gap-2">
+                         Mua Ngay
+                    </button>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-amber-100 flex flex-col">
+                <div class="card-zoom h-56 overflow-hidden rounded-t-2xl">
+                    <img src="https://coffeered.vn/upload/product/viet-quat-9823.jpg" 
+                         alt="Yogurt Việt Quất" 
+                         class="w-full h-full object-cover transition-transform duration-500">
+                </div>
+                <div class="p-5 flex flex-col flex-grow">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="text-lg font-bold text-gray-900">Yogurt Việt Quất</h3>
+                        <span class="text-lg font-bold text-amber-700">30.000đ</span>
+                    </div>
+                    <p class="text-gray-600 text-sm mb-4 flex-grow line-clamp-2">
+                        Sữa chua dẻo mịn kết hợp với mứt việt quất chua ngọt tự nhiên, ngon khó cưỡng.
+                    </p>
+                    <button onclick="openDetails('Yogurt Việt Quất', '30.000đ', 'Sữa chua dẻo mịn kết hợp với mứt việt quất chua ngọt tự nhiên, ngon khó cưỡng.', 'https://coffeered.vn/upload/product/viet-quat-9823.jpg')" class="w-full bg-amber-700 hover:bg-amber-800 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center gap-2">
+                         Mua Ngay
+                    </button>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-amber-100 flex flex-col">
+                <div class="card-zoom h-56 overflow-hidden rounded-t-2xl">
+                    <img src="https://www.bartender.edu.vn/wp-content/uploads/2020/10/soda-bac-ha.jpg" 
+                         alt="Soda Bạc Hà" 
+                         class="w-full h-full object-cover transition-transform duration-500">
+                </div>
+                <div class="p-5 flex flex-col flex-grow">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="text-lg font-bold text-gray-900">Soda Bạc Hà</h3>
+                        <span class="text-lg font-bold text-amber-700">30.000đ</span>
+                    </div>
+                    <p class="text-gray-600 text-sm mb-4 flex-grow line-clamp-2">
+                       Thức uống giải khát, nổi bật với màu xanh ngọc tươi mát, hương thơm the mát.
+                    </p>
+                    <button onclick="openDetails('Soda Bạc Hà', '30.000đ', 'Loại thức uống giải khát, nổi bật với màu xanh ngọc tươi mát, hương thơm the mát đặc trưng của bạc hà, hòa quyện vị chua dịu từ chanh.', 'https://www.bartender.edu.vn/wp-content/uploads/2020/10/soda-bac-ha.jpg')" class="w-full bg-amber-700 hover:bg-amber-800 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center gap-2">
+                         Mua Ngay
+                    </button>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-amber-100 flex flex-col">
+                <div class="card-zoom h-56 overflow-hidden rounded-t-2xl">
+                    <img src="https://lypham.vn/wp-content/uploads/2024/09/luu-y-khi-lam-cacao-nong.jpg" 
+                         alt="Cacao Nóng" 
+                         class="w-full h-full object-cover transition-transform duration-500">
+                </div>
+                <div class="p-5 flex flex-col flex-grow">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="text-lg font-bold text-gray-900">Cacao Nóng</h3>
+                        <span class="text-lg font-bold text-amber-700">25.000đ</span>
+                    </div>
+                    <p class="text-gray-600 text-sm mb-4 flex-grow line-clamp-2">
+                        Cacao nguyên chất đậm đà, thêm chút kẹo dẻo marshmallow, ấm áp cho ngày mưa.
+                    </p>
+                    <button onclick="openDetails('Cacao Nóng', '25.000đ', 'Cacao nguyên chất đậm đà, thêm chút kẹo dẻo marshmallow, ấm áp cho ngày mưa.', 'https://lypham.vn/wp-content/uploads/2024/09/luu-y-khi-lam-cacao-nong.jpg')" class="w-full bg-amber-700 hover:bg-amber-800 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center gap-2">
+                         Mua Ngay
+                    </button>
+                </div>
+            </div>
+
+             <div class="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-amber-100 flex flex-col">
+                <div class="card-zoom h-56 overflow-hidden rounded-t-2xl">
+                    <img src="https://cdn.tgdd.vn/Files/2021/08/27/1378145/cach-lam-tra-vai-hoa-hong-thanh-mat-giai-nhiet-cho-ngay-nang-nong-202108270009234548.jpg" 
+                         alt="Trà Vải Hoa Hồng" 
+                         class="w-full h-full object-cover transition-transform duration-500">
+                </div>
+                <div class="p-5 flex flex-col flex-grow">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="text-lg font-bold text-gray-900">Trà Vải Hoa Hồng</h3>
+                        <span class="text-lg font-bold text-amber-700">40.000đ</span>
+                    </div>
+                    <p class="text-gray-600 text-sm mb-4 flex-grow line-clamp-2">
+                        Hương hoa hồng dịu dàng, trái vải mọng nước ngâm đường phèn, vị ngọt thanh tao.
+                    </p>
+                    <button onclick="openDetails('Trà Vải Hoa Hồng', '40.000đ', 'Hương hoa hồng dịu dàng, trái vải mọng nước ngâm đường phèn, vị ngọt thanh tao.', 'https://cdn.tgdd.vn/Files/2021/08/27/1378145/cach-lam-tra-vai-hoa-hong-thanh-mat-giai-nhiet-cho-ngay-nang-nong-202108270009234548.jpg')" class="w-full bg-amber-700 hover:bg-amber-800 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center gap-2">
+                         Mua Ngay
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <div id="product-modal" onclick="closeModal()">
+        <div class="modal-content bg-white w-full max-w-lg rounded-2xl shadow-2xl overflow-hidden relative" onclick="event.stopPropagation()">
+            <button onclick="closeModal()" class="absolute top-4 right-4 bg-gray-100 hover:bg-gray-200 text-gray-800 w-10 h-10 rounded-full flex items-center justify-center font-bold z-10 transition-colors">
+                &times;
+            </button>
+            <div class="h-64 overflow-hidden">
+                <img id="modal-img" src="" alt="Sản phẩm" class="w-full h-full object-cover">
+            </div>
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 id="modal-title" class="text-2xl font-bold text-gray-900">Tên Món</h3>
+                    <span id="modal-price" class="text-xl font-bold text-amber-700">0đ</span>
+                </div>
+                <p id="modal-desc" class="text-gray-600 leading-relaxed mb-6">
+                    Mô tả món ăn sẽ hiển thị ở đây.
+                </p>
+                <button onclick="confirmPurchase()" class="w-full bg-amber-700 hover:bg-amber-800 text-white font-bold py-3 px-4 rounded-xl transition-colors">
+                    Xác Nhận Đặt Món
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-gray-800 text-white py-10 mt-12 border-t border-gray-700">
+        <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
+            <div>
+                <h3 class="text-xl font-bold mb-4">Moon Coffee</h3>
+                <p class="text-gray-400 text-sm">Nơi lưu giữ những khoảnh khắc bình yên bên những ly cafe và những tách trà.</p>
+            </div>
+             <div>
+                <h3 class="text-xl font-bold mb-4">Liên Hệ</h3>
+                <p class="text-gray-400 text-sm">Hotline: 1900 1234</p>
+                <p class="text-gray-400 text-sm">Email: lienhe@tiemcaphe.vn</p>
+            </div>
+            <div>
+                 <h3 class="text-xl font-bold mb-4">Địa Chỉ</h3>
+                 <p class="text-gray-400 text-sm">306/5 Huỳnh Thúc Kháng, Khu Phố 4, Lâm Đồng</p>
+            </div>
+        </div>
+        <div class="text-center mt-8 pt-8 border-t border-gray-700 text-sm text-gray-500">
+            &copy; 2024 Moon Coffee. All rights reserved.
+        </div>
+    </footer>
+
+    <div id="toast" class="notification fixed bottom-5 right-5 bg-green-600 text-white px-6 py-4 rounded-lg shadow-xl z-50 flex items-center gap-3">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+        </svg>
+        <div>
+            <h4 class="font-bold text-sm">Đặt hàng thành công!</h4>
+            <p id="toast-message" class="text-sm">Đã thêm món vào danh sách.</p>
+        </div>
+    </div>
+
+    <script>
+        let timeoutId;
+        let currentItemName = "";
+
+        function openDetails(name, price, desc, img) {
+            currentItemName = name;
+            document.getElementById('modal-title').textContent = name;
+            document.getElementById('modal-price').textContent = price;
+            document.getElementById('modal-desc').textContent = desc;
+            document.getElementById('modal-img').src = img;
+            
+            document.getElementById('product-modal').classList.add('show');
+            document.body.style.overflow = 'hidden'; // Khóa cuộn trang
+        }
+
+        function closeModal() {
+            document.getElementById('product-modal').classList.remove('show');
+            document.body.style.overflow = 'auto'; // Mở lại cuộn trang
+        }
+
+        function confirmPurchase() {
+            closeModal();
+            showToast(currentItemName);
+        }
+
+        function showToast(itemName) {
+            const toast = document.getElementById('toast');
+            const message = document.getElementById('toast-message');
+            
+            // Đã sửa lại lỗi hiển thị thông báo bằng cách dùng dấu nháy huyền (Backticks)
+            message.textContent = `Đã đặt "${itemName}" thành công.`;
+            toast.classList.add('show');
+            
+            if (timeoutId) clearTimeout(timeoutId);
+
+            timeoutId = setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
